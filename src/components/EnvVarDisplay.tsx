@@ -1,15 +1,19 @@
+// src/components/EnvVarDisplay.tsx
+
+import React from "react";
+
 interface EnvVarDisplayProps {
-  variables: { name: string; value?: string }[];
+  envVars: Record<string, string>;
 }
 
-const EnvVarDisplay: React.FC<EnvVarDisplayProps> = ({ variables }) => {
+const EnvVarDisplay: React.FC<EnvVarDisplayProps> = ({ envVars }) => {
   return (
-    <div className="bg-yellow-100 p-4 rounded-md mt-4">
-      <h3 className="text-md font-bold mb-2">Required Environment Variables:</h3>
-      <ul className="list-disc list-inside text-sm">
-        {variables.map((v, i) => (
-          <li key={i}>
-            <strong>{v.name}</strong>: {v.value || "<enter-value>"}
+    <div className="mt-6 bg-gray-50 p-4 rounded border">
+      <h4 className="font-semibold mb-2">Required Environment Variables</h4>
+      <ul className="text-sm">
+        {Object.entries(envVars).map(([key, value]) => (
+          <li key={key}>
+            <strong>{key}:</strong> {value}
           </li>
         ))}
       </ul>
