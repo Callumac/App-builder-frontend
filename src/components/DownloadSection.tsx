@@ -1,22 +1,47 @@
-"use client";
+// src/components/DownloadSection.tsx
+
 import React from "react";
 
 interface DownloadSectionProps {
-  downloadUrl: string;
-  filename: string;
+  result: {
+    downloadUrl: string;
+    appName: string;
+    expiresAt: string;
+    envVars: Record<string, string>;
+  };
 }
 
-export const DownloadSection: React.FC<DownloadSectionProps> = ({ downloadUrl, filename }) => {
+const DownloadSection: React.FC<DownloadSectionProps> = ({ result }) => {
   return (
-    <div className="mt-4 bg-green-100 p-4 rounded-xl shadow-md">
-      <h2 className="text-lg font-semibold mb-2">Your app is ready!</h2>
+    <div className="bg-white shadow rounded-xl p-6 mt-10">
+      <h3 className="text-2xl font-semibold mb-4">
+        {result.appName} is ready!
+      </h3>
+
+      <p className="text-gray-700 mb-2">
+        Download Link (expires on {new Date(result.expiresAt).toLocaleString()}):
+      </p>
       <a
-        href={downloadUrl}
-        download={filename}
-        className="inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+        href={result.downloadUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline font-medium"
       >
-        Download: {filename}
+        Download App
       </a>
+
+      <div className="mt-6">
+        <h4 className="font-bold mb-2">Required Environment Variables</h4>
+        <ul className="bg-gray-100 p-3 rounded text-sm">
+          {Object.entries(result.envVars).map(([key, value]) => (
+            <li key={key}>
+              <strong>{key}:</strong> {value}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
+
+export default DownloadSection;
