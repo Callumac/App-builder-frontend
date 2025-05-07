@@ -1,7 +1,7 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://your-backend-url/api";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 export async function generateApp(payload: any) {
-  const response = await fetch(`${API_BASE}/generate`, {
+  const response = await fetch(`${API_BASE}/build`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
