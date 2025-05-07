@@ -29,6 +29,8 @@ export default function BuildPage() {
     <main className="min-h-screen py-12 px-6 bg-gray-950 text-white">
       <div className="max-w-xl mx-auto">
         <h2 className="text-3xl font-bold mb-6 text-center">Build Your App</h2>
+        
+        {/* Builder Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-semibold mb-1">App Name</label>
@@ -62,7 +64,7 @@ export default function BuildPage() {
               onChange={(e) => setFeatures(e.target.value)}
               rows={5}
               className="w-full px-4 py-2 bg-gray-800 text-white rounded-lg"
-              placeholder="e.g. social media automation, in-app chat, login, payment..."
+              placeholder="e.g. automation, login, chatbot..."
             />
           </div>
 
@@ -75,14 +77,26 @@ export default function BuildPage() {
           </button>
         </form>
 
+        {/* Preview Section */}
+        {(appName || features) && (
+          <div className="mt-10 bg-gray-900 p-4 rounded-lg">
+            <h3 className="text-xl font-semibold mb-2">Preview</h3>
+            <p><strong>App Name:</strong> {appName}</p>
+            <p><strong>Platform:</strong> {platform}</p>
+            <p><strong>Features:</strong> {features}</p>
+          </div>
+        )}
+
+        {/* Result Section */}
         {downloadUrl && (
-          <div className="mt-6 text-center">
+          <div className="mt-8 text-center">
+            <h3 className="text-xl font-semibold mb-4">Your App is Ready!</h3>
             <a
               href={downloadUrl}
               download
               className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold"
             >
-              Download Your App
+              Download App
             </a>
           </div>
         )}
